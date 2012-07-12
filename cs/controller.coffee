@@ -9,4 +9,3 @@ class Controller
 
 window.onload = ->
 	new Controller()
-	

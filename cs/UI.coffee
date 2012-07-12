@@ -13,6 +13,3 @@ class UI
 	inspecting_fn: (t) ->
 		@$("timer_label").innerHTML = t
 		@$("timer_label").style.color="red"
-		
-
-
