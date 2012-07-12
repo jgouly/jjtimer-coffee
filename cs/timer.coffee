@@ -7,12 +7,12 @@ class Timer
 
 	constructor: (@ui) ->
 		@state = Waiting
-		@running_fn = => ui.running_fn @get_time()
+		@running_fn = => @ui.running_fn() @get_time()
 		@use_inspection = false
 		@inspection_count = 15
 
 	set_inspection: =>
-		@ui.inspecting_fn @inspection_count--
+		@ui.inspecting_fn() @inspection_count--
 		@inspection_timer = setTimeout @set_inspection, 1000
 
 	set_running: ->
@@ -34,6 +34,8 @@ class Timer
 			else
 				@solve['DNF'] = true
 		@inspection_count = 15
+
+		@ui.on_stop()
 				
 		@state = Delay
 		setTimeout (=> @state = Waiting), 500
@@ -53,3 +55,6 @@ class Timer
 		
 	get_time: ->
 		new Date().getTime() - @start_time
+
+	get_solve: ->
+		@solve
